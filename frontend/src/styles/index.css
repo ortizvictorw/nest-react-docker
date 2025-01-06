@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body,
+  #root {
+    @apply h-full;
+  }
+
+  h1 {
+    @apply text-2xl font-bold;
+  }
+
+  h2 {
+    @apply text-xl font-semibold;
+  }
+
+  h3 {
+    @apply text-lg font-medium;
+  }
+
+  a {
+    @apply text-brand-primary underline hover:text-red-hover transition-colors;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply px-4 py-2 bg-brand-primary text-primary-white rounded-md focus:outline-none transition-all;
+    @apply hover:bg-red-hover focus:ring;
+  }
+
+  .btn:disabled,
+  .input:disabled {
+    opacity: 0.5;
+  }
+
+  .btn.danger {
+    @apply bg-primary-red hover:bg-red-hover;
+  }
+
+  .input {
+    @apply w-full p-2 border border-gray-300 rounded-md transition-colors focus:ring focus:border-brand-primary;
+  }
+
+  .card {
+    @apply p-5 bg-primary-white border border-gray-200 rounded-md shadow-md;
+  }
+
+  .table-container {
+    @apply mt-5 border border-gray-200 rounded-lg shadow overflow-x-auto;
+  }
+
+  .table-filter {
+    @apply p-4 flex flex-col gap-4 lg:flex-row lg:gap-5 border border-gray-200 rounded-lg shadow;
+  }
+
+  .sidebar {
+    @apply fixed top-0 left-0 h-full w-72 p-5 bg-brand-header-background shadow-md transform transition-transform lg:translate-x-0 -translate-x-72;
+  }
+
+  .sidebar.show {
+    @apply translate-x-0;
+  }
+}
