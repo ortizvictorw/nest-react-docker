@@ -75,3 +75,7 @@
    - **Impacto**: Habilita funcionalidades impulsadas por IA en el front.
 
 
+![image](https://github.com/user-attachments/assets/2dc896e4-df45-4980-bbf7-8a779799c1b7)
+![image](https://github.com/user-attachments/assets/8ceeced7-5de8-4bc7-a8a5-4749132e80f7)
+
+![image](https://github.com/user-attachments/assets/d524e0bd-8ad9-4f95-be50-01c2113a0e65)
