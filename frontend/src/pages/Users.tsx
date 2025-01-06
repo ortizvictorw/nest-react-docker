@@ -17,18 +17,22 @@ export default function Users() {
   const [addUserShow, setAddUserShow] = useState(false);
   const [error, setError] = useState<string>();
   const [isGeneratingUsername, setIsGeneratingUsername] = useState(false);
+  const [filters, setFilters] = useState({
+    firstName: '',
+    lastName: '',
+    username: '',
+    role: '',
+  });
 
   const { data, isLoading, refetch } = useQuery(
-    ['users'],
+    ['users', filters],
     async () => {
-      const { firstName, lastName, username, role, preference } = getValues();
-
+      const { firstName, lastName, username, role } = filters;
       return (
         await userService.findAll({
           firstName: firstName || undefined,
           lastName: lastName || undefined,
           username: username || undefined,
-          preference: preference || undefined,
           role: role || undefined,
         })
       ).filter((user) => user.id !== authenticatedUser.id);
@@ -41,7 +45,7 @@ export default function Users() {
 
   useEffect(() => {
     refetch();
-  }, []);
+  }, [filters]);
 
   const {
     register,
@@ -101,8 +105,51 @@ export default function Users() {
           disabled={isLoading}
         >
           <RefreshCw />
-          {isLoading ? 'Refreshing...' : 'Refresh'}
         </button>
+      </div>
+
+      <div className="table-filter mt-2">
+        <div className="flex flex-row gap-5">
+          <input
+            type="text"
+            className="input w-1/2"
+            placeholder="First Name"
+            onChange={(e) =>
+              setFilters((prev) => ({ ...prev, firstName: e.target.value }))
+            }
+          />
+          <input
+            type="text"
+            className="input w-1/2"
+            placeholder="Last Name"
+            onChange={(e) =>
+              setFilters((prev) => ({ ...prev, lastName: e.target.value }))
+            }
+          />
+        </div>
+        <div className="flex flex-row gap-5">
+          <input
+            type="text"
+            className="input w-1/2"
+            placeholder="Username"
+            onChange={(e) =>
+              setFilters((prev) => ({ ...prev, username: e.target.value }))
+            }
+          />
+          <select
+            name=""
+            id=""
+            className="input w-1/2"
+            onChange={(e) =>
+              setFilters((prev) => ({ ...prev, role: e.target.value }))
+            }
+          >
+            <option value="">All</option>
+            <option value="user">User</option>
+            <option value="editor">Editor</option>
+            <option value="admin">Admin</option>
+          </select>
+        </div>
       </div>
 
       <UsersTable data={data || []} isLoading={isLoading} />
